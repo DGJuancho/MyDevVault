@@ -1,6 +1,6 @@
 # 🚀 Pull Request
 
-Gracias por tu interés en contribuir al **personal-dev-kit** 🧰  
+Gracias por tu interés en contribuir al **MyDevVault** 🧰  
 Antes de enviar tu PR, asegúrate de haber leído el `README.md` y que tu aporte siga el estilo y estructura del repositorio.
 
 ---
@@ -8,7 +8,7 @@ Antes de enviar tu PR, asegúrate de haber leído el `README.md` y que tu aporte
 ## 📋 Descripción del cambio
 
 > Explica brevemente qué cambios realizaste y por qué.  
-> Ejemplo: _Se agregó un script para inicializar proyectos con estructura estándar y se documentó en `docs/init.md`._
+> Ejemplo: _Se agregó un script para inicializar proyectos con estructura estándar y se documentó en `docs/init-mydevvault.md`._
 
 ---
 
