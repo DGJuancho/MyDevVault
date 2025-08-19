@@ -1,40 +1,53 @@
-# 🚀 Pull Request
-
-Gracias por tu interés en contribuir al **MyDevVault** 🧰  
-Antes de enviar tu PR, asegúrate de haber leído el `README.md` y que tu aporte siga el estilo y estructura del repositorio.
-
+---
+name: "🚀 Pull Request"
+about: Para contribuir al repositorio.
+title: "<tipo><emoji>(<área>): <descripción>"
+labels: ""
+assignees: ""
 ---
 
-## 📋 Descripción del cambio
+# 🚀 Descripción del Pull Request
 
-> Explica brevemente qué cambios realizaste y por qué.  
-> Ejemplo: _Se agregó un script para inicializar proyectos con estructura estándar y se documentó en `docs/init-mydevvault.md`._
+> Explica brevemente qué cambios realizaste y el motivo detrás de ellos.
+> **Importante:** Sigue la guía de estilo de commits (`commit-style-guide.md`) para el título.
 
 ---
 
 ## 🔧 Tipo de cambio
 
-Marca con una `x` lo que aplica:
+Marca con una `x` lo que aplica y ajusta el emoji del título:
 
-- [ ] 🐛 Bugfix
-- [ ] ✨ Nueva funcionalidad
-- [ ] 📝 Mejora de documentación
-- [ ] 🎨 Mejora visual o estructural
-- [ ] 🧼 Limpieza o refactor
-- [ ] 🔒 Mejora de seguridad
-- [ ] 🧪 Otro (especificar abajo)
-
-_Otro (opcional):_
+- [ ] ✨ **`feat`** (nueva funcionalidad)
+- [ ] 🐛 **`fix`** (corrección de error)
+- [ ] ♻️ **`refactor`** (cambio de código que no añade funcionalidad ni corrige un error)
+- [ ] 📝 **`docs`** (cambios en la documentación)
+- [ ] 🧱 **`chore`** (cambios en el proceso de construcción, herramientas o archivos de ayuda)
+- [ ] 🧪 **`test`** (adición de pruebas, sin cambio en el código de producción)
+- [ ] 🎨 **`style`** (cambios que no afectan la lógica del código, como formato)
+- [ ] 🗑️ **`deprecate`** (funcionalidad obsoleta o eliminada)
+- [ ] ⚙️ **`ci`** (cambios en los archivos y scripts de CI)
 
 ---
 
 ## ✅ Checklist
 
-- [ ] He probado los cambios en mi entorno local
-- [ ] El PR no introduce errores ni rompe funcionalidades existentes
-- [ ] Incluí documentación actualizada (si aplica)
-- [ ] Los nombres de archivos, funciones o scripts siguen una convención clara
-- [ ] El mensaje de commit sigue la guía de estilo (`tipo🎨(área): descripción`)
+- [ ] He probado los cambios en mi entorno local.
+- [ ] He actualizado la documentación relevante (si aplica).
+- [ ] Los nuevos scripts (`.sh`) tienen permisos de ejecución (`chmod +x`).
+- [ ] Mi código sigue el estilo y las convenciones del kit.
+- [ ] He verificado que mi PR no introduce errores ni rompe funcionalidades existentes.
+
+---
+
+## 🛠️ Pruebas y Output
+
+> Si este PR incluye cambios en los scripts (`scripts/`), por favor, pega la salida completa de tu terminal al probarlos. Esto es crucial para la revisión.
+
+**Salida de prueba de `scripts/`:**
+
+```bash
+# Pega aquí el output de tu terminal al probar los scripts afectados.
+```
 
 ---
 
