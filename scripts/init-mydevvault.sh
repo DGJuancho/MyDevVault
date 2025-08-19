@@ -214,10 +214,11 @@ fi
 if [ -d "./.git" ]; then
     echo "ℹ️  El directorio actual ya es un repositorio Git. No se inicializó de nuevo."
     echo "   Por favor, revisa los cambios generados y haz un commit si es necesario."
+    git diff --stat
 else
     echo "ℹ️  El directorio actual no es un repositorio Git. Si este es el 'MyDevVault' principal,"
     echo "   considera inicializar Git manualmente con 'git init' y hacer un commit de estos archivos."
 fi
 
 echo "🎉 La estructura interna de MyDevVault ha sido verificada/actualizada."
-echo "   Recuerda que el próximo paso es crear y ejecutar 'scripts/setup.sh' (una vez que lo hayamos creado) desde la raíz del kit para configurar tu entorno global."
+echo "   Recuerda que el próximo paso es ejecutar 'scripts/setup.sh' (con privilegios de administrador si es la primera vez) desde la raíz del kit para configurar tu entorno global."
