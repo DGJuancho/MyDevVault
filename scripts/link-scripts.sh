@@ -2,7 +2,7 @@
 
 # ============================\n
 # 🔗 Script: link-scripts.sh\n
-# 📌 Crea enlaces simbólicos multiplataforma (Windows/Linux) en ~/bin\n
+# 📌 Copia scripts y archivos de alias a ubicaciones persistentes\n
 # ============================\n
 
 FORCE=false
@@ -14,100 +14,77 @@ fi
 # Asume que link-scripts.sh está en REPO_ROOT_DIR/scripts/
 REPO_ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
+# Directorio de scripts ejecutables
 BIN_DIR="$HOME/bin"
 mkdir -p "$BIN_DIR"
+echo "📁 Directorio de scripts ejecutables: $BIN_DIR"
 
-# Función para crear enlaces simbólicos en Windows usando PowerShell
-create_windows_symlink() {
-  local src="$1"
-  local tgt="$2"
-  local name="$3"
+# Directorio para archivos de configuración del kit (como los alias)
+MYDEVVAULT_CONFIG_DIR="$HOME/.config/mydevvault"
+mkdir -p "$MYDEVVAULT_CONFIG_DIR"
+echo "📁 Directorio de configuración del kit: $MYDEVVAULT_CONFIG_DIR"
 
-  local win_src
-  win_src=$(cygpath -w "$src" | sed 's|/|\\\\|g')
-  local win_tgt
-  win_tgt=$(cygpath -w "$tgt" | sed 's|/|\\\\|g')
-
-  # echo "🛠️  Ejecutando (mklink): New-Item -ItemType SymbolicLink -Path '$win_tgt' -Target '$win_src'" # Para depuración
-  powershell.exe -NoProfile -Command "New-Item -ItemType SymbolicLink -Path '$win_tgt' -Target '$win_src'" > /dev/null # Redirige salida para evitar spam
-
-  if [ $? -eq 0 ]; then
-    echo "🪟 Enlace simbólico creado en Windows: $name → $win_src"
-  else
-    echo "❌ Error: mklink falló para $name"
-    echo "   Detalles del comando: New-Item -ItemType SymbolicLink -Path '$win_tgt' -Target '$win_src'"
-  fi
-}
-
-# Detectar si estamos en Windows
-IS_WINDOWS=false
-unameOut="$(uname -s)"
-if [[ "$unameOut" == MINGW* ]] || [[ "$unameOut" == MSYS* ]]; then
-  IS_WINDOWS=true
-fi
-
-# Definir los scripts a enlazar y sus rutas relativas a REPO_ROOT_DIR
-# El key es el nombre del enlace en ~/bin, el value es la ruta real del script
-declare -A SCRIPTS_TO_LINK=(
+# Definir los scripts a copiar y sus rutas relativas a REPO_ROOT_DIR
+# El key es el nombre del archivo de destino, el value es la ruta real del script
+declare -A SCRIPTS_TO_COPY=(
     ["setup"]="$REPO_ROOT_DIR/scripts/setup.sh"
-    ["init-mydevvault"]="$REPO_ROOT_DIR/scripts/init-mydevvault.sh" # Ahora coincide con tu nombre de archivo
+    ["init-mydevvault"]="$REPO_ROOT_DIR/scripts/init-mydevvault.sh"
     ["crear_proyecto"]="$REPO_ROOT_DIR/scripts/crear_proyecto.sh"
-    ["mydevvault_aliases"]="$REPO_ROOT_DIR/aliases.sh" # Este está en la raíz, no en 'scripts/'
 )
 
-echo "🔗 Iniciando creación de enlaces simbólicos en '$BIN_DIR'..."
+echo "🔗 Copiando scripts ejecutables a '$BIN_DIR'..."
 
-for name in "${!SCRIPTS_TO_LINK[@]}"; do
-    source_path="${SCRIPTS_TO_LINK[$name]}"
+for name in "${!SCRIPTS_TO_COPY[@]}"; do
+    source_path="${SCRIPTS_TO_COPY[$name]}"
     target_path="$BIN_DIR/$name"
 
-    echo "⚙️  Procesando enlace para '$name'..."
+    echo "⚙️  Procesando script para '$name'..."
 
     # Verificar si el archivo fuente existe
     if [ ! -f "$source_path" ]; then
-        echo "⚠️  Advertencia: Script no encontrado en el kit: '$source_path'. Saltando enlace para '$name'."
+        echo "⚠️  Advertencia: Script no encontrado en el kit: '$source_path'. Saltando copia para '$name'."
         continue
     fi
 
-    # Verificar si el destino ya existe como enlace o archivo regular y manejar conflictos
-    if [ -L "$target_path" ]; then # Si ya es un enlace simbólico
-        current_target=$(readlink "$target_path")
-        if [ "$current_target" = "$source_path" ]; then
-            echo "✅ Enlace correcto ya existe: $name → $current_target"
-            continue # No hacer nada si el enlace ya es correcto
-        fi
-        echo "♻️  Enlace simbólico existente para '$name' está desactualizado o es incorrecto. Removiendo para actualizar."
-        rm "$target_path"
-    elif [ -e "$target_path" ]; then # Si existe como archivo regular o directorio
-        if [ "$FORCE" = true ]; then
-            echo "⚠️  Conflicto con archivo regular/directorio existente → '$target_path'."
-            echo "↪️  Reemplazando automáticamente porque estamos en modo --force."
-            rm -rf "$target_path" # Usar -rf para eliminar directorios también si es el caso
+    # Verificar si el destino ya existe como archivo regular o enlace simbólico
+    if [ -e "$target_path" ]; then
+        if [ -L "$target_path" ] && [ "$(readlink "$target_path")" = "$source_path" ]; then
+            echo "✅ El enlace simbólico para '$name' ya es correcto. No se requiere acción."
+            continue
+        elif [ "$FORCE" = true ]; then
+            echo "⚠️  Conflicto con archivo/enlace existente → '$target_path'."
+            echo "↪️  Reemplazando automáticamente en modo --force."
+            rm -rf "$target_path"
         else
-            echo "⚠️  Conflicto: Un archivo o directorio regular ya existe en '$target_path'. Omitiendo creación de enlace."
-            echo "   Ejecuta con '--force' para sobrescribir (ej. 'bash link-scripts.sh --force')."
+            echo "⚠️  Conflicto: Un archivo o enlace ya existe en '$target_path'. Omitiendo copia."
+            echo "   Ejecuta con '--force' para sobrescribir (ej. 'bash setup.sh --force')."
             continue
         fi
     fi
 
-    # Crear el enlace simbólico
-    if [ "$IS_WINDOWS" = true ]; then
-        create_windows_symlink "$source_path" "$target_path" "$name"
-    else
-        ln -s "$source_path" "$target_path"
-        if [ $? -eq 0 ]; then
-            echo "🔗 Enlace creado: $name → $source_path"
-        else
-            echo "❌ Error al crear enlace simbólico para $name"
-        fi
-    fi
-
-    # Otorgar permisos de ejecución si es un script .sh
-    if [[ "$source_path" == *.sh ]]; then
-        chmod +x "$source_path"
-        echo "   Permisos de ejecución concedidos a '$source_path'."
-    fi
+    # Copiar el script y darle permisos de ejecución
+    cp "$source_path" "$target_path"
+    chmod +x "$target_path"
+    echo "✅ Script copiado y permisos concedidos: $name → $target_path"
 
 done
 
-echo -e "\n🏁 Vinculación de scripts completada."
+# Copiar el archivo de alias a su ubicación persistente
+echo "⚙️  Copiando archivo de alias a '$MYDEVVAULT_CONFIG_DIR'..."
+ALIASES_SOURCE="$REPO_ROOT_DIR/aliases.sh"
+ALIASES_TARGET="$MYDEVVAULT_CONFIG_DIR/aliases.sh"
+
+if [ -f "$ALIASES_SOURCE" ]; then
+    if [ -f "$ALIASES_TARGET" ] && [ "$FORCE" != true ]; then
+        echo "⚠️  Archivo de alias existente en la ubicación de destino. Omitiendo copia."
+        echo "   Ejecuta con '--force' para sobrescribir."
+    else
+        cp "$ALIASES_SOURCE" "$ALIASES_TARGET"
+        echo "✅ Archivo de alias copiado: $ALIASES_SOURCE → $ALIASES_TARGET"
+    fi
+else
+    echo "⚠️  Advertencia: Archivo de alias del kit no encontrado: '$ALIASES_SOURCE'. Saltando copia."
+fi
+
+
+echo -e "\n🏁 Operación de copia completada."
