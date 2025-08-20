@@ -1,60 +1,49 @@
-# ⚙️ Script: setup.sh
+# ⚙️ Guía de Setup
 
-Este script automatiza la configuración inicial del entorno vinculando archivos clave mediante enlaces simbólicos y adaptándose al sistema operativo.
-
----
-
-## 🧩 Funcionalidad principal
-
-- Detecta el sistema operativo (Windows, Linux o macOS)
-- Crea enlaces simbólicos a archivos como `.gitconfig`, `.bashrc`, `.gitignore_global` desde una carpeta de configuración centralizada (`config/`)
-- Asegura una configuración consistente sin sobrescribir los archivos reales
+Este documento detalla el proceso de instalación automatizado de MyDevVault.
 
 ---
 
-## 📚 Archivos involucrados
+## 🎯 Objetivo
 
-- `config/gitconfig.example` → Enlazado como `~/.gitconfig`
-- `config/aliases.sh` → Enlazado al archivo de inicialización del shell (`~/.bashrc`, `~/.zshrc`, etc.)
-- `config/gitignore_global` → Enlazado como `~/.gitignore_global`
-- Otros archivos de configuración que desees incluir en la carpeta `config/`
+El script `setup.sh` está diseñado para:
 
----
-
-## 🚦 Compatibilidad con sistemas operativos
-
-- 🪟 Windows: Usa `mklink` si se ejecuta en PowerShell o CMD
-- 🐧 Linux/macOS: Usa `ln -s` para crear enlaces simbólicos
+- **Instalación de Scripts:** Copiar los scripts ejecutables (`crear_proyecto`, `init-mydevvault`, `uninstall`) a un directorio accesible desde cualquier lugar de tu terminal.
+- **Configuración del Entorno:** Configurar el `PATH` de tu shell para que los scripts sean reconocidos.
+- **Carga de Alias:** Configurar tu perfil de shell (`.bashrc` o `.bash_profile`) para cargar automáticamente todos los alias y funciones definidos en tu archivo `~/.config/mydevvault/aliases.sh`.
 
 ---
 
-## 💻 Ejecución
+## 💻 Uso del Script
+
+El proceso de instalación se realiza en un solo paso, lo cual simplifica enormemente el setup.
+
+1.  **Navega a la raíz del repositorio**
+
+2.  **Ejecuta el script de setup**
+    ```bash
+    bash scripts/setup.sh
+    ```
+
+El script te guiará a través de la instalación y mostrará mensajes de éxito o advertencias si ya hay configuraciones existentes.
+
+---
+
+## ⚙️ Configuración del Shell
+
+El script modificará tus archivos de perfil (`.bashrc`, `.bash_profile`, etc.) para añadir dos líneas clave:
+
+1.  **Añadir la carpeta `~/bin` al `PATH`**.
+2.  **Cargar el archivo `aliases.sh`** desde la nueva ubicación `~/.config/mydevvault/aliases.sh`.
+
+Esto asegura que los alias y scripts de MyDevVault estén siempre disponibles cada vez que abres tu terminal.
+
+---
+
+## 🗑️ Desinstalación
+
+Para revertir completamente los cambios realizados por `setup.sh`, puedes usar el script de desinstalación.
 
 ```bash
-bash setup.sh
+bash scripts/uninstall.sh
 ```
-
----
-
-## 📝 Consideraciones
-
-- Ejecuta el script desde la raíz del repositorio
-- Es posible que necesites permisos elevados si estás creando enlaces fuera del directorio del usuario
-- Asegúrate de tener la carpeta `config/` y los archivos base previamente generados
-
----
-
-## 🔧 Personalización
-
-Puedes modificar el script para:
-
-- Cambiar rutas de destino según tu estructura local
-- Añadir enlaces a nuevos archivos de configuración
-- Aplicar lógica para validar si un archivo ya existe o si el enlace ya está activo
-
----
-
-## 📎 Archivos relacionados
-
-- [`init-mydevvault.sh`](./init-mydevvault.md): para inicializar la estructura base del kit
-- [`git-setup.md`](./git-setup.md): guía para aplicar configuraciones de Git

@@ -1,51 +1,23 @@
-# 🚀 Script: init-mydevvault.sh
+# 🛠️ Guía de `init-mydevvault`
 
-Este script automatiza la creación de una estructura base para tu entorno Git MyDevVault.
-
----
-
-## 📁 Estructura generada
-
-- `snippets/` → Contiene fragmentos reutilizables organizados por lenguaje (`php`, `bash`, `markdown`)
-- `templates/` → Plantillas generales
-- `.gitignore_global` → Reglas globales comunes
-- `commit-style-guide.md` → Guía de estilo con emojis para commits
-- `aliases.sh` → Alias útiles para Git
-- `git-setup.md` → Documentación complementaria de configuración
-- `README.md` → Descripción general del kit
+Este documento describe el script `init-mydevvault.sh`, una herramienta auxiliar para la configuración interna del repositorio.
 
 ---
 
-## ⚙️ Acciones principales
+## 🎯 Objetivo
 
-- Crea carpetas y archivos base
-- Inicializa un repositorio Git vacío
-- Aplica primer commit con convención estándar
+Recrear la estructura de carpetas y los archivos base de la plantilla del kit `MyDevVault` si por alguna razón no existen o fueron eliminados.
 
 ---
 
-## 🧪 Uso del script
+## 💻 Uso del script y Consideraciones
+
+## 💻 Uso y Consideraciones
+
+El script está diseñado para ser ejecutado directamente desde la raíz del repositorio.
 
 ```bash
-bash init-mydevvault.sh
+bash scripts/init-mydevvault.sh
 ```
 
-Al finalizar, verás un mensaje como:
-
-```text
-✅ Repositorio 'MyDevVAult' inicializado correctamente con commit inicial.
-```
-
----
-
-## ✍️ Personalización sugerida
-
-- Ajustar contenidos de `aliases.sh` y `.gitignore_global` según tus necesidades
-- Agregar tus propios fragmentos en `snippets/`
-- Añadir plantillas adicionales a `templates/`
-
----
-
-## 🔗 Archivos relacionados
-
-- [`git-setup.md`](./git-setup.md): guía para configurar Git con este entorno
+> **Nota:** La función principal de este script es recrear la estructura de carpetas y archivos base del kit. Si ya has ejecutado `setup.sh`, el cual maneja la configuración principal, no es necesario ejecutar este script a menos que hayas eliminado o movido la estructura de directorios internos.

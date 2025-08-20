@@ -1,6 +1,6 @@
-# 🧾 Convenciones de desarrollo
+# 🧾 Convenciones y Guías de Estilo
 
-Este documento recopila las convenciones de estilo adoptadas para mantener un flujo de trabajo limpio, claro y coherente en los proyectos dentro del `MyDevVault`.
+Este documento describe las convenciones de desarrollo y el flujo de trabajo para mantener un historial de Git limpio, coherente y fácil de leer en el kit `MyDevVault`.
 
 ---
 
@@ -10,13 +10,13 @@ Se adopta una estructura enriquecida con emojis para facilitar la lectura del hi
 
 ### 📌 Formato recomendado
 
-```
+```bash
 <tipo><emoji>(área): descripción breve y significativa
 ```
 
 ### 🎯 Ejemplos
 
-```
+```bash
 feat✨(api): agrega nuevo endpoint de autenticación
 fix🐛(login): corrige validación de credenciales
 docs📝(readme): mejora redacción del índice de contenidos
@@ -40,44 +40,6 @@ chore🧱(estructura): reorganiza carpetas base del kit
 | revert   | ⏪    | Reversión de un commit anterior                     |
 
 > Puedes adaptarlo según tus necesidades: agregar tipos, ajustar emojis o definir nuevas áreas.
-
----
-
-## 🛠️ Alias recomendados
-
-Define atajos útiles en tu entorno para agilizar el flujo de trabajo con Git y la terminal:
-
-### 🔧 Git
-
-| Alias   | Comando                                 | Descripción                                       |
-| ------- | --------------------------------------- | ------------------------------------------------- |
-| `gs`    | `git status`                            | Ver estado del repositorio                        |
-| `ga`    | `git add .`                             | Añadir todos los archivos modificados             |
-| `gai`   | `git add -i`                            | Añadir archivos de forma interactiva (por número) |
-| `gap`   | `git add -p`                            | Añadir fragmentos de código (por bloque/hunk)     |
-| `gdiff` | `git diff --color`                      | Ver diferencias con resaltado antes del stage     |
-| `gc`    | `git commit -m`                         | Commit con mensaje directo                        |
-| `gp`    | `git push`                              | Enviar commits al repositorio remoto              |
-| `gpl`   | `git pull`                              | Traer actualizaciones del repositorio remoto      |
-| `gl`    | `git log --oneline --graph --decorate`  | Historial compacto y visual                       |
-| `gll`   | `git log --graph --pretty=format:"..."` | Historial detallado con autor, fecha y ramas      |
-
-### 🖥️ Sistema
-
-| Alias | Comando                                   | Descripción                |
-| ----- | ----------------------------------------- | -------------------------- |
-| `ll`  | `ls -l`                                   | Listado largo de archivos  |
-| `ls`  | `ls -F --color=auto --show-control-chars` | Listado con formato visual |
-
-### 🪟 Ejecutables Windows bajo MSYS/Git Bash
-
-| Alias    | Comando             | Descripción                                    |
-| -------- | ------------------- | ---------------------------------------------- |
-| `node`   | `winpty node.exe`   | Ejecutar Node.js con compatibilidad de consola |
-| `php`    | `winpty php.exe`    | Ejecutar PHP con compatibilidad de consola     |
-| `winget` | `winpty winget.exe` | Ejecutar Winget con compatibilidad de consola  |
-
-> Todos estos alias están definidos en `aliases.sh` (en la raíz del kit) y se cargan automáticamente al ejecutar `link-scripts.sh`.
 
 ---
 

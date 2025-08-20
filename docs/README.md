@@ -1,25 +1,18 @@
 # 📚 Documentación del Kit MyDevVault
 
-Este directorio contiene las guías detalladas para cada uno de los scripts incluidos en el `MyDevVault`, así como las convenciones de desarrollo utilizadas para mantener la coherencia del proyecto.
+Este directorio contiene las guías detalladas para cada uno de los scripts y convenciones del kit.
 
 ---
 
-## 🛠️ Scripts documentados
+## 🛠️ Guías de scripts
 
-- [`setup.sh`](./setup.md): configura enlaces simbólicos y adapta el entorno según el sistema operativo.
-- [`init-mydevvault.sh`](./init-mydevvault.md): genera estructura base del repositorio con archivos clave y configuración Git personalizada.
-- [`crear_proyecto.sh`](./crear_proyecto.md): inicializa nuevos proyectos con estructura profesional, adaptable por lenguaje o plantilla.
-- [`link-scripts.sh`](./link-scripts.md): crea enlaces simbólicos multiplataforma y configura la carga de alias en el entorno bash.
-
----
-
-## 🧾 Convenciones de desarrollo
-
-- [`convenciones.md`](./convenciones.md): guía de estilo para mensajes de commit, alias recomendados y organización de ramas.
+- [**Guía de Setup**](./setup.md): Documentación completa del script de instalación y configuración.
+- [**Guía de Creación de Proyectos**](./crear_proyecto.md): Detalles del script para crear la estructura base de un nuevo proyecto.
+- [**Guía de Inicialización**](./init-mydevvault.md): Descripción del script para inicializar la estructura interna del kit.
 
 ---
 
-## 🔁 Documentos relacionados
+## 🧾 Convenciones y Guías
 
-- [`../git-setup.md`](../git-setup.md): guía para aplicar configuraciones de Git basadas en los archivos generados.
-- [`../commit-style-guide.md`](../commit-style-guide.md): plantilla original de convenciones de commit generada automáticamente.
+- [**Convenciones y Guías de Estilo**](./convenciones.md): Guía de estilo para mensajes de commit y convenciones de trabajo.
+- [**Configuración de Git**](../git-setup.md): Documento con recomendaciones para la configuración global de Git.
