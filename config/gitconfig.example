@@ -3,5 +3,5 @@
     excludesFile = ~/.gitignore_global
     autocrlf = true
 [user]
-	name = Juan Núñez [CASA]
-	email = juancho.designs@icloud.com
+	name = "Tu Nombre"
+    email = "tu.email@example.com"
