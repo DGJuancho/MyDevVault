@@ -4,9 +4,25 @@ Historial de cambios del proyecto `MyDevVault`.
 
 ---
 
-## [v1.0] - 2025-07-24
+## [v2.0] - 2025-08-20
 
 ### ✨ Nuevo
+
+- Se agrega el script de desinstalación (`uninstall.sh`) para remover el kit de forma segura.
+
+### 🐛 Corregido
+
+- Se mejora la guía y el flujo de inicialización del kit.
+
+### 🔄 Refactorización
+
+- Se mejora la robustez y la modularidad de los scripts principales.
+- Se refactoriza la documentación (`docs/`), unificando la guía de convenciones de commit y la de ramas en un solo documento.
+- Se eliminaron los archivos redundantes (`git-setup.md` y `commit-style-guide.md`) para simplificar la estructura de la raíz del repositorio.
+
+---
+
+## [v1.0] - 2025-07-24
 
 - Reconstrucción completa del kit MyDevVault desde cero, estableciendo una base robusta y modular.
 - Estructura modular del repositorio con carpetas `scripts/`, `docs/`, `snippets/`, `templates/` y archivos de configuración.

@@ -18,12 +18,13 @@ El script `setup.sh` está diseñado para:
 
 El proceso de instalación se realiza en un solo paso, lo cual simplifica enormemente el setup.
 
-1.  **Navega a la raíz del repositorio**
+1. **Navega a la raíz del repositorio**
 
-2.  **Ejecuta el script de setup**
-    ```bash
-    bash scripts/setup.sh
-    ```
+2. **Ejecuta el script de setup**
+
+```bash
+   bash scripts/setup.sh
+```
 
 El script te guiará a través de la instalación y mostrará mensajes de éxito o advertencias si ya hay configuraciones existentes.
 
@@ -33,8 +34,8 @@ El script te guiará a través de la instalación y mostrará mensajes de éxito
 
 El script modificará tus archivos de perfil (`.bashrc`, `.bash_profile`, etc.) para añadir dos líneas clave:
 
-1.  **Añadir la carpeta `~/bin` al `PATH`**.
-2.  **Cargar el archivo `aliases.sh`** desde la nueva ubicación `~/.config/mydevvault/aliases.sh`.
+1. **Añadir la carpeta `~/bin` al `PATH`**.
+2. **Cargar el archivo `aliases.sh`** desde la nueva ubicación `~/.config/mydevvault/aliases.sh`.
 
 Esto asegura que los alias y scripts de MyDevVault estén siempre disponibles cada vez que abres tu terminal.
 
