@@ -43,7 +43,7 @@ alias gc='git commit -m'
 alias gp='git push'
 alias gpl='git pull'
 alias gl='git log --oneline --graph --decorate'
-alias gll='git log --graph --pretty=format:"%C(yellow)%h%Creset %Cgreen%ad%Creset %C(blue)%an%Creset %C(auto)%d%Creset %s\" --date=short'
+alias gll='git log --graph --pretty=format:"%C(yellow)%h%Creset %Cgreen%ad%Creset %C(blue)%an%Creset %C(auto)%d%Creset %s" --date=short'
 
 
 # 🖥️ Alias de Sistema
