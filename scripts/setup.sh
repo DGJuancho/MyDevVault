@@ -68,8 +68,18 @@ if [ -z "$CURRENT_GITIGNORE_FILE" ]; then
     echo "✅ No se encontró un archivo .gitignore global configurado. Creando y configurando uno nuevo."
     cp "$GITIGNORE_SOURCE" "$GITIGNORE_TARGET"
     git config --global core.excludesfile "$GITIGNORE_TARGET"
+elif [ ! -f "$CURRENT_GITIGNORE_FILE" ]; then
+    # Si está configurado pero el archivo no existe, preguntamos al usuario si desea crearlo
+    echo "⚠️  Tu configuración global de Git apunta a un archivo .gitignore que no existe: '$CURRENT_GITIGNORE_FILE'."
+    read -p "¿Deseas crear un nuevo archivo .gitignore global usando la plantilla del kit? (s/n): " respuesta
+    if [[ "$respuesta" =~ ^[Ss]$ ]]; then
+        echo "✅ Creando un nuevo archivo .gitignore global desde la plantilla del kit."
+        cp "$GITIGNORE_SOURCE" "$GITIGNORE_TARGET"
+    else
+        echo "   ℹ️  No se creará un nuevo archivo. Se respeta tu decisión."
+    fi
 else
-    # Si ya existe, informamos al usuario y le damos la opción de fusionar
+    # Si ya existe y está configurado, informamos al usuario
     echo "⚠️  Se detectó que ya tienes un archivo .gitignore global configurado en: $CURRENT_GITIGNORE_FILE"
     echo "   Las reglas de MyDevVault no se copiarán para evitar conflictos."
     echo "   Puedes revisar la plantilla en '$GITIGNORE_SOURCE' y añadir las reglas manualmente si lo deseas."
@@ -95,12 +105,6 @@ echo "⚙️  Llamando a link-scripts.sh para enlazar ejecutables y configurar e
 bash "$REPO_ROOT_DIR/scripts/link-scripts.sh"
 
 # ⚙️ Verificar y configurar archivos de shell para cargar aliases y PATH
-echo "⚙️  Verificando archivos de configuración de shell ($HOME/.bashrc, $HOME/.zshrc, etc.)..."
-
-# Archivos de configuración de shell a revisar
-SHELL_CONFIG_FILES=("$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.bash_profile")
-
-# ⚙️  Verificar y configurar archivos de shell para cargar aliases y PATH
 echo "⚙️  Verificando archivos de configuración de shell ($HOME/.bashrc, $HOME/.zshrc, etc.)..."
 
 # Directorio de configuración persistente para el kit
